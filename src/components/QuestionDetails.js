@@ -1,18 +1,19 @@
-import React, { PureComponent } from 'react';
-import { Card, CardHeader,CardBody, CardTitle, FormGroup, Label, Input, Form, Button, Row, Col} from 'reactstrap';
-import { connect } from 'react-redux';
-import User from './User';
-import { handleAnswer } from '../actions/shared';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import { Form, Button, Card, Col, Row, Label } from "react-bootstrap";
+
+import { connect } from "react-redux";
+import User from "./User";
+import { handleAnswer } from "../actions/shared";
+import PropTypes from "prop-types";
 
 class QuestionDetails extends PureComponent {
   state = {
-    selectedOption: ''
+    selectedOption: "",
   };
 
   radioSelected = (e) => {
     this.setState({
-      selectedOption: e.target.value
+      selectedOption: e.target.value,
     });
   };
 
@@ -22,61 +23,101 @@ class QuestionDetails extends PureComponent {
   };
 
   render() {
-    const { question, questionAuthor, answer, total, percOne, percTwo} = this.props;
+    const {
+      question,
+      questionAuthor,
+      answer,
+      total,
+      percOne,
+      percTwo,
+    } = this.props;
     const { selectedOption } = this.state;
 
     return (
       <Row>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
           <Card>
-            <CardHeader>
-              <User id={questionAuthor.id}/>
-            </CardHeader>
-            <CardBody>
-              <CardTitle>Would You Rather</CardTitle>
-              {answer ?
+            <Card.Header>
+              <User id={questionAuthor.id} />
+            </Card.Header>
+            <Card.Body>
+              <Card.Title className="text-center">Would You Rather</Card.Title>
+              {answer ? (
                 <div>
-                  <FormGroup>
-                    <FormGroup check disabled>
-                      <Label check>
-                        <Input type="radio" checked={answer==="optionOne"} readOnly/>{' '}
-                        {question.optionOne.text}
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check disabled>
-                      <Label check>
-                        <Input type="radio" checked={answer==="optionTwo"} readOnly/>{' '}
-                        {question.optionTwo.text}
-                      </Label>
-                    </FormGroup>
-                  </FormGroup>
+                  <Form.Group>
+                    <Form.Group check disabled>
+                      <Card.Text>
+                        <Form.Check
+                          type="radio"
+                          label={question.optionOne.text}
+                          checked={answer === "optionOne"}
+                          readOnly
+                        />
+                      </Card.Text>
+                    </Form.Group>
+
+                    <Form.Group check disabled>
+                      <Card.Text>
+                        <Form.Check
+                          type="radio"
+                          label={question.optionTwo.text}
+                          checked={answer === "optionTwo"}
+                          readOnly
+                        />
+                      </Card.Text>
+                    </Form.Group>
+                  </Form.Group>
                   <div className="progress">
-                    <div className="progress-one" style={{ width: `${percOne}%` }}>{`${percOne}%`}</div>
-                    <div className="progress-two" style={{ width: `${percTwo}%` }}>{`${percTwo}%`}</div>
+                    <div
+                      className="progress-one"
+                      style={{ width: `${percOne}%` }}
+                    >{`${percOne}%`}</div>
+                    <div
+                      className="progress-two"
+                      style={{ width: `${percTwo}%` }}
+                    >{`${percTwo}%`}</div>
                   </div>
-                  <div className="total">
-                    Total number of votes: {total}
-                  </div>
-                </div>:
+                  <div className="total">Total number of votes: {total}</div>
+                </div>
+              ) : (
                 <Form onSubmit={this.handleSubmit}>
-                  <FormGroup tag="fieldset">
-                    <FormGroup >
-                      <Label >
-                        <Input type="radio" name="radio1" value="optionOne" onChange={this.radioSelected} />{' '}
-                        {question.optionOne.text}
-                      </Label>
-                    </FormGroup>
-                    <FormGroup >
-                      <Label >
-                        <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />{' '}
-                        {question.optionTwo.text}
-                      </Label>
-                    </FormGroup>
-                  </FormGroup>
-                  <Button disabled={selectedOption === ''}>Submit</Button>
+                  <Card.Body>
+                    <Card.Title>Would you rather</Card.Title>
+                    <Form.Group controlId="radio1">
+                      <Card.Text>
+                        <Form.Check
+                          type="radio"
+                          label={question.optionOne.text}
+                          id="radio1"
+                          name="radio1"
+                          value="optionOne"
+                          onChange={this.radioSelected}
+                        />
+                      </Card.Text>
+
+                      <Card.Text>
+                        <Form.Check
+                          type="radio"
+                          label={question.optionTwo.text}
+                          id="radio2"
+                          name="radio1"
+                          value="optionTwo"
+                          onChange={this.radioSelected}
+                        />
+                      </Card.Text>
+
+                      <Button
+                        block
+                        disabled={selectedOption === ""}
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+                    </Form.Group>
+                  </Card.Body>
                 </Form>
-              }
-            </CardBody>
+              )}
+            </Card.Body>
           </Card>
         </Col>
       </Row>
@@ -89,20 +130,20 @@ QuestionDetails.propTypes = {
   questionAuthor: PropTypes.object,
   answer: PropTypes.string,
   percOne: PropTypes.string.isRequired,
-  percTwo: PropTypes.string.isRequired
+  percTwo: PropTypes.string.isRequired,
 };
 
 function financial(x) {
   return Number.parseFloat(x).toFixed(2);
 }
 
-function mapStateToProps ({ questions, users, authedUser }, { match }) {
+function mapStateToProps({ questions, users, authedUser }, { match }) {
   const answers = users[authedUser].answers;
   let answer, percOne, percTwo, total;
   const { id } = match.params;
   const question = questions[id];
   if (answers.hasOwnProperty(question.id)) {
-    answer = answers[question.id]
+    answer = answers[question.id];
   }
   const questionAuthor = users[question.author];
   total = question.optionOne.votes.length + question.optionTwo.votes.length;
@@ -114,8 +155,8 @@ function mapStateToProps ({ questions, users, authedUser }, { match }) {
     answer,
     total,
     percOne,
-    percTwo
-  }
+    percTwo,
+  };
 }
 
 function mapDispatchToProps(dispatch, props) {
@@ -123,9 +164,9 @@ function mapDispatchToProps(dispatch, props) {
 
   return {
     saveQuestionAnswer: (answer) => {
-      dispatch(handleAnswer(id, answer))
-    }
-  }
+      dispatch(handleAnswer(id, answer));
+    },
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails);

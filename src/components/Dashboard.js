@@ -1,85 +1,63 @@
-import React, { PureComponent } from 'react';
-import Question from './Question';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import Question from "./Question";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Tabs, Tab, Col } from "react-bootstrap";
 
 class DashBoard extends PureComponent {
-  state = {
-    activeTab: '1'
-  };
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  }
-
   render() {
     const { unansweredQuestions, answeredQuestions } = this.props;
     return (
-      <div>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
-              onClick={() => { this.toggle('1'); }}
-            >
-              Unanswered
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
-            >
-              Answered
-            </NavLink>
-          </NavItem>
-        </Nav>
+      <Col
+        md={8}
+        lg={8}
+        xl={8}
+        className="mx-auto my-5 text-center dashboard_container"
+      >
+        <Tabs
+          className="d-flex justify-content-center "
+          defaultActiveKey="Unanswered"
+          id="uncontrolled-tab-example"
+        >
+          <Tab eventKey="Unanswered" title="Unanswered Questions">
+            {!!unansweredQuestions &&
+              unansweredQuestions.map((i) => (
+                <div>
+                  <Question id={i} />
+                </div>
+              ))}
+          </Tab>
 
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              {unansweredQuestions.map(qid =>
-                <Col key={qid} sm="6" md="4">
-                  <Question id={qid}/>
-                </Col>
-              )}
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              {answeredQuestions.map(qid =>
-                <Col key={qid} sm="6" md="4">
-                  <Question id={qid}/>
-                </Col>
-              )}
-            </Row>
-          </TabPane>
-        </TabContent>
-      </div>
+          <Tab eventKey="Answered" title="Answered Questions">
+            {answeredQuestions.map((i, index) => (
+              <div>
+                <Question id={i} />
+              </div>
+            ))}
+          </Tab>
+        </Tabs>
+      </Col>
     );
   }
 }
 
 DashBoard.propTypes = {
-  answeredPolls : PropTypes.array,
-  unansweredPolls : PropTypes.array
+  answeredPolls: PropTypes.array,
+  unansweredPolls: PropTypes.array,
 };
 
-function mapStateToProps ({ questions, users, authedUser }) {
+function mapStateToProps({ questions, users, authedUser }) {
   const user = users[authedUser];
-  const answeredQuestions = Object.keys(user.answers)
-    .sort((a,b) => questions[b].timestamp - questions[a].timestamp);
+  const answeredQuestions = Object.keys(user.answers).sort(
+    (a, b) => questions[b].timestamp - questions[a].timestamp
+  );
   return {
-    unansweredQuestions : Object.keys(questions).filter(qid => !answeredQuestions.includes(qid))
-      .sort((a,b) => questions[b].timestamp - questions[a].timestamp),
-    answeredQuestions
-  }
+    unansweredQuestions: Object.keys(questions)
+      .filter((qid) => !answeredQuestions.includes(qid))
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
+    answeredQuestions,
+  };
 }
 
-export default connect(mapStateToProps)(DashBoard)
+export default connect(mapStateToProps)(DashBoard);

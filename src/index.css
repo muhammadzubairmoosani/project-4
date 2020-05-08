@@ -52,6 +52,16 @@ div.card {
   color: blueviolet;
 }
 
+.question-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.question-list li{
+  cursor: pointer;
+}
+
 /*  hello world */
 .navbar_container{
   display: flex;

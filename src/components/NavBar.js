@@ -25,9 +25,9 @@ class NavBar extends PureComponent {
     });
   };
 
-  componentDidMount() {
-    console.log(this.props.authedUser)
-  }
+  // componentDidMount() {
+  //   console.log(this.props.authedUser)
+  // }
 
   render() {
     const { authedUser } = this.props;
