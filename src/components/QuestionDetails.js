@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Form, Button, Card, Col, Row, Label } from "react-bootstrap";
+import { Form, Button, Card, Col, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import User from "./User";

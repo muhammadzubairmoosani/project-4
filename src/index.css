@@ -78,5 +78,14 @@ div.card {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.navbar_container .nav_link {
   width: 385px;
+
+}
+
+.navbar_container .logout{
+  width: 300px;
+
 }
