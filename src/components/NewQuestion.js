@@ -43,8 +43,8 @@ class NewQuestion extends Component {
         <h4 className="mb-4 text-monospace text-secondary">Ask Question</h4>
         <Col className="rounded shadow-lg py-4 mx-auto" xs={12} md={7} lg={6}>
           <h5 className="mb-4">Would You Rather?</h5>
-          <Form.Group controlId="formBasicEmail"></Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
+          {/* <Form.Group controlId="formBasicEmail"></Form.Group> */}
+          <Form.Group>
             <Form.Control
               name="optionOne"
               value={optionOne}

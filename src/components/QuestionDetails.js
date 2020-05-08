@@ -46,25 +46,23 @@ class QuestionDetails extends PureComponent {
                 <div>
                   <Form.Group>
                     <Form.Group check disabled>
-                      <Card.Text>
-                        <Form.Check
-                          type="radio"
-                          label={question.optionOne.text}
-                          checked={answer === "optionOne"}
-                          readOnly
-                        />
-                      </Card.Text>
+                      <Form.Check
+                        type="radio"
+                        label={question.optionOne.text}
+                        checked={answer === "optionOne"}
+                        readOnly
+                        className="my-3"
+                      />
                     </Form.Group>
 
                     <Form.Group check disabled>
-                      <Card.Text>
-                        <Form.Check
-                          type="radio"
-                          label={question.optionTwo.text}
-                          checked={answer === "optionTwo"}
-                          readOnly
-                        />
-                      </Card.Text>
+                      <Form.Check
+                        type="radio"
+                        label={question.optionTwo.text}
+                        checked={answer === "optionTwo"}
+                        readOnly
+                        className="my-3"
+                      />
                     </Form.Group>
                   </Form.Group>
                   <div className="progress">
@@ -84,28 +82,24 @@ class QuestionDetails extends PureComponent {
                   <Card.Body>
                     <Card.Title>Would you rather</Card.Title>
                     <Form.Group controlId="radio1">
-                      <Card.Text>
-                        <Form.Check
-                          type="radio"
-                          label={question.optionOne.text}
-                          id="radio1"
-                          name="radio1"
-                          value="optionOne"
-                          onChange={this.radioSelected}
-                        />
-                      </Card.Text>
-
-                      <Card.Text>
-                        <Form.Check
-                          type="radio"
-                          label={question.optionTwo.text}
-                          id="radio2"
-                          name="radio1"
-                          value="optionTwo"
-                          onChange={this.radioSelected}
-                        />
-                      </Card.Text>
-
+                      <Form.Check
+                        type="radio"
+                        label={question.optionOne.text}
+                        id="radio1"
+                        name="radio1"
+                        value="optionOne"
+                        className="my-3"
+                        onChange={this.radioSelected}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label={question.optionTwo.text}
+                        id="radio2"
+                        name="radio1"
+                        value="optionTwo"
+                        className="my-3"
+                        onChange={this.radioSelected}
+                      />
                       <Button
                         block
                         disabled={selectedOption === ""}

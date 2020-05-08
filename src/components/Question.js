@@ -26,28 +26,22 @@ class Question extends React.Component {
         </div>
         <Card.Body>
           <Card.Title>Would you rather</Card.Title>
-          <Card.Text>
-            <ul className="question-list">
-              <li
-                className={
-                  question.optionOne.votes.includes(auth)
-                    ? "optionSelected"
-                    : ""
-                }
-              >
-                {question.optionOne.text}
-              </li>
-              <li
-                className={
-                  question.optionTwo.votes.includes(auth)
-                    ? "optionSelected"
-                    : ""
-                }
-              >
-                {question.optionTwo.text}
-              </li>
-            </ul>
-          </Card.Text>
+          <ul className="question-list">
+            <li
+              className={
+                question.optionOne.votes.includes(auth) ? "optionSelected" : ""
+              }
+            >
+              <Card.Text>{question.optionOne.text}</Card.Text>
+            </li>
+            <li
+              className={
+                question.optionTwo.votes.includes(auth) ? "optionSelected" : ""
+              }
+            >
+              <Card.Text>{question.optionTwo.text}</Card.Text>
+            </li>
+          </ul>
         </Card.Body>
       </Card>
     );

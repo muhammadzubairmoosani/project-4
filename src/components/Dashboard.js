@@ -22,8 +22,8 @@ class DashBoard extends PureComponent {
         >
           <Tab eventKey="Unanswered" title="Unanswered Questions">
             {!!unansweredQuestions &&
-              unansweredQuestions.map((i) => (
-                <div>
+              unansweredQuestions.map((i,index) => (
+                <div key={index}>
                   <Question id={i} />
                 </div>
               ))}
@@ -31,7 +31,7 @@ class DashBoard extends PureComponent {
 
           <Tab eventKey="Answered" title="Answered Questions">
             {answeredQuestions.map((i, index) => (
-              <div>
+              <div  key={index}>
                 <Question id={i} />
               </div>
             ))}

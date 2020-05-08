@@ -1,7 +1,7 @@
-import React, { Fragment } from "react"
-import { connect } from "react-redux"
-import { Table } from 'reactstrap';
-import PropTypes from 'prop-types';
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 function Leaderboard(props) {
   const { users } = props;
@@ -21,7 +21,13 @@ function Leaderboard(props) {
           {users.map((user, index) => (
             <tr key={user.id}>
               <td>{index + 1}</td>
-              <td><img src={user.avatarURL} className='avatar' alt={`Avatar of ${user.name}`}/></td>
+              <td>
+                <img
+                  src={user.avatarURL}
+                  className="avatar"
+                  alt={`Avatar of ${user.name}`}
+                />
+              </td>
               <td>{user.name}</td>
               <td>{user.questions.length}</td>
               <td>{Object.keys(user.answers).length}</td>
@@ -30,19 +36,19 @@ function Leaderboard(props) {
         </tbody>
       </Table>
     </Fragment>
-  )
+  );
 }
 
 Leaderboard.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = ({ users }) => {
-  const userScore = user =>
+  const userScore = (user) =>
     Object.keys(user.answers).length + user.questions.length;
   return {
-    users: Object.values(users).sort((a, b) => userScore(b) - userScore(a))
-  }
+    users: Object.values(users).sort((a, b) => userScore(b) - userScore(a)),
+  };
 };
 
-export default connect(mapStateToProps)(Leaderboard)
+export default connect(mapStateToProps)(Leaderboard);
