@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
 
 class Question extends React.Component {
-  constuctor() {
-    this.loadQuestionDetails = this.routeChange.bind(this);
-  }
-  loadQuestionDetails(e, questionId) {
+  getQuestionDetail(e, questionId) {
     let path = `/questions/` + questionId;
     this.props.history.push(path);
   }
@@ -16,7 +13,7 @@ class Question extends React.Component {
     const { question, auth } = this.props;
     return (
       <Card
-        onClick={(e) => this.loadQuestionDetails(e, question.id)}
+        onClick={(e) => this.getQuestionDetail(e, question.id)}
         className="p-3 my-3 d-flex flex-row align-items-center"
       >
         <div>

@@ -12,21 +12,21 @@ class NewQuestion extends Component {
     redirect: false,
   };
 
-  handleOptionOneChange = (event) => {
+  _onChangeOptionOne = (event) => {
     event.preventDefault();
     this.setState({
       optionOne: event.target.value,
     });
   };
 
-  handleOptionTwoChange = (event) => {
+  _onChangeOptionTwo = (event) => {
     event.preventDefault();
     this.setState({
       optionTwo: event.target.value,
     });
   };
 
-  handleSubmit = (event) => {
+  _onSubmit = (event) => {
     event.preventDefault();
     const { optionOne, optionTwo } = this.state;
     this.props.addQuestion(optionOne, optionTwo);
@@ -39,7 +39,7 @@ class NewQuestion extends Component {
     }
     const { optionOne, optionTwo } = this.state;
     return (
-      <Form onSubmit={this.handleSubmit} className="mt-5 text-center">
+      <Form onSubmit={this._onSubmit} className="mt-5 text-center">
         <h4 className="mb-4 text-monospace text-secondary">Ask Question</h4>
         <Col className="rounded shadow-lg py-4 mx-auto" xs={12} md={7} lg={6}>
           <h5 className="mb-4">Would You Rather?</h5>
@@ -48,7 +48,7 @@ class NewQuestion extends Component {
             <Form.Control
               name="optionOne"
               value={optionOne}
-              onChange={this.handleOptionOneChange}
+              onChange={this._onChangeOptionOne}
               type="text"
               placeholder="Option One..."
             />
@@ -56,7 +56,7 @@ class NewQuestion extends Component {
             <Form.Control
               name="optionTwo"
               value={optionTwo}
-              onChange={this.handleOptionTwoChange}
+              onChange={this._onChangeOptionTwo}
               type="text"
               placeholder="Option Two..."
             />

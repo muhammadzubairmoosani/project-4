@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import Question from "./Question";
-import classnames from "classnames";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Col } from "react-bootstrap";
@@ -22,7 +21,7 @@ class DashBoard extends PureComponent {
         >
           <Tab eventKey="Unanswered" title="Unanswered Questions">
             {!!unansweredQuestions &&
-              unansweredQuestions.map((i,index) => (
+              unansweredQuestions.map((i, index) => (
                 <div key={index}>
                   <Question id={i} />
                 </div>
@@ -31,7 +30,7 @@ class DashBoard extends PureComponent {
 
           <Tab eventKey="Answered" title="Answered Questions">
             {answeredQuestions.map((i, index) => (
-              <div  key={index}>
+              <div key={index}>
                 <Question id={i} />
               </div>
             ))}

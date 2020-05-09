@@ -5,21 +5,20 @@ import React, { PureComponent } from "react";
 
 class NavBar extends PureComponent {
   state = {
-    isOpen: false,
     loggedInUser: {},
   };
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.users !== this.state.loggedInUser) {
+      [...Object.values(this.props.users)].filter(
+        (i) =>
+          i.id === this.props.authedUser && this.setState({ loggedInUser: i })
+      );
+    }
+  }
 
   render() {
-    const { authedUser, users } = this.props;
-    [...Object.values(users)].filter(
-      (i) => i.id === authedUser && this.setState({ loggedInUser: i })
-    );
+    const { authedUser } = this.props;
     return (
       <div>
         {authedUser && (

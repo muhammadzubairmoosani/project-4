@@ -8,15 +8,15 @@ class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { userId: "" };
-    this.handleChangeUser = this.handleChangeUser.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this._onChangeUser = this._onChangeUser.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
   }
 
-  handleChangeUser(event) {
+  _onChangeUser(event) {
     this.setState({ userId: event.target.value });
   }
 
-  handleSubmit(event) {
+  _onSubmit(event) {
     const { userId } = this.state;
     const { authenticate } = this.props;
     if (userId) {
@@ -31,7 +31,7 @@ class Login extends PureComponent {
     const { users } = this.props;
     const { userId } = this.state;
     return (
-      <Form className="mt-5 text-center" onSubmit={this.handleSubmit}>
+      <Form className="mt-5 text-center" onSubmit={this._onSubmit}>
         <Col
           className="rounded shadow-lg py-4 mx-auto"
           xs={12}
@@ -49,7 +49,7 @@ class Login extends PureComponent {
               as="select"
               // onChange={(e) => setSelectedUser(e.target.value)}
               value={userId}
-              onChange={this.handleChangeUser}
+              onChange={this._onChangeUser}
             >
               <option value="-1">Choose your account...</option>
               {Object.entries(users).length &&

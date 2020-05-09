@@ -11,13 +11,13 @@ class QuestionDetails extends PureComponent {
     selectedOption: "",
   };
 
-  radioSelected = (e) => {
+  selectedAnswer = (e) => {
     this.setState({
       selectedOption: e.target.value,
     });
   };
 
-  handleSubmit = (e) => {
+  _onSubmit = (e) => {
     e.preventDefault();
     this.props.saveQuestionAnswer(this.state.selectedOption);
   };
@@ -45,7 +45,7 @@ class QuestionDetails extends PureComponent {
               {answer ? (
                 <div>
                   <Form.Group>
-                    <Form.Group check disabled>
+                    <Form.Group disabled>
                       <Form.Check
                         type="radio"
                         label={question.optionOne.text}
@@ -55,7 +55,7 @@ class QuestionDetails extends PureComponent {
                       />
                     </Form.Group>
 
-                    <Form.Group check disabled>
+                    <Form.Group disabled>
                       <Form.Check
                         type="radio"
                         label={question.optionTwo.text}
@@ -78,7 +78,7 @@ class QuestionDetails extends PureComponent {
                   <div className="total">Total number of votes: {total}</div>
                 </div>
               ) : (
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this._onSubmit}>
                   <Card.Body>
                     <Card.Title>Would you rather</Card.Title>
                     <Form.Group controlId="radio1">
@@ -89,7 +89,7 @@ class QuestionDetails extends PureComponent {
                         name="radio1"
                         value="optionOne"
                         className="my-3"
-                        onChange={this.radioSelected}
+                        onChange={this.selectedAnswer}
                       />
                       <Form.Check
                         type="radio"
@@ -98,7 +98,7 @@ class QuestionDetails extends PureComponent {
                         name="radio1"
                         value="optionTwo"
                         className="my-3"
-                        onChange={this.radioSelected}
+                        onChange={this.selectedAnswer}
                       />
                       <Button
                         block
