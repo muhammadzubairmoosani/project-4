@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import User from "./User";
 import { handleAnswer } from "../actions/shared";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 class QuestionDetails extends PureComponent {
   state = {
@@ -30,9 +31,12 @@ class QuestionDetails extends PureComponent {
       total,
       percOne,
       percTwo,
+      isWrongID,
     } = this.props;
     const { selectedOption } = this.state;
-
+    if (isWrongID) {
+      return <Redirect to="/not-found" />;
+    }
     return (
       <Row>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
@@ -136,6 +140,11 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
   let answer, percOne, percTwo, total;
   const { id } = match.params;
   const question = questions[id];
+  if (question === undefined) {
+    return {
+      isWrongID: true,
+    };
+  }
   if (answers.hasOwnProperty(question.id)) {
     answer = answers[question.id];
   }
