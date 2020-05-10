@@ -25,7 +25,7 @@ class NavBar extends PureComponent {
           <div className="navbar_container">
             <ul className="nav_link">
               <li>
-                <Link to="/">Dashboard</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
                 <Link to="/add">Ask New Question</Link>

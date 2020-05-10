@@ -21,6 +21,7 @@ class Login extends PureComponent {
     const { authenticate } = this.props;
     if (userId) {
       authenticate(userId);
+      this.props.history.push('/dashboard')
     } else {
       alert("Please select a user before.");
     }

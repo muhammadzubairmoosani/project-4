@@ -18,12 +18,12 @@ function Routes(props) {
           <Route path="/" component={Login} />
         ) : (
           <Fragment>
-            <Route path="/" exact component={Dashboard} />
+            <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/leaderboard" exact component={LeaderBoard} />
             <Route path="/add" component={NewQuestion} />
             <Route path="/questions/:id" component={QuestionDetails} />
             <Route exact path="/logout" component={Logout} />
-            <Route path="/not-found" component={NotFound} />
+            <Route component={NotFound} />
           </Fragment>
         )}
       </Switch>

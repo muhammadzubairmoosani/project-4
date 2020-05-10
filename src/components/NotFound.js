@@ -8,7 +8,7 @@ const NotFound = ({ history }) => (
       <Card.Header>404</Card.Header>
       <Card.Body>
         <Card.Title>Page Not Found</Card.Title>
-        <Button size="small" color="primary" onClick={() => history.push("/")}>
+        <Button size="small" color="primary" onClick={() => history.push("/dashboard")}>
           Go Home
         </Button>
       </Card.Body>

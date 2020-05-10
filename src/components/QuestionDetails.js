@@ -123,6 +123,10 @@ class QuestionDetails extends PureComponent {
   }
 }
 
+QuestionDetails.defaultProps = {
+  percOne: "",
+  percTwo: "",
+};
 QuestionDetails.propTypes = {
   question: PropTypes.object,
   questionAuthor: PropTypes.object,
