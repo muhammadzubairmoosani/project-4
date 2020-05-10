@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Dashboard from "./Dashboard";
 import LeaderBoard from "./LeaderBoard";
 import Login from "./Login";
