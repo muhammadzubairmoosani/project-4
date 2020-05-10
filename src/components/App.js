@@ -1,27 +1,43 @@
 import React, { Component, Fragment } from "react";
+import Dashboard from "./Dashboard";
+import LeaderBoard from "./LeaderBoard";
+import Login from "./Login";
+import NewQuestion from "./NewQuestion";
+import QuestionDetails from "./QuestionDetails";
+import NotFound from "./NotFound";
+import Logout from "./Logout";
+import NavBar from "./NavBar";
+import AuthenticatedRoutes from "./AuthenticatedRoutes";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router } from "react-router-dom";
-
 import { handleInitialData } from "../actions/shared";
-import Routes from "./Routes";
-import NavBar from "./NavBar";
 
 class App extends Component {
   componentDidMount() {
     this.props.handleInitialData();
   }
   render() {
-    const { notLoggedIn } = this.props;
-
     return (
       <Router>
-        <Fragment>
-          <div className="main-container">
-            <NavBar />
-            <Routes notLoggedIn={notLoggedIn} />
-          </div>
-        </Fragment>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <AuthenticatedRoutes exact path="/dashboard" component={Dashboard} />
+          <AuthenticatedRoutes
+            exact
+            path="/leaderboard"
+            component={LeaderBoard}
+          />
+          <AuthenticatedRoutes exact path="/add" component={NewQuestion} />
+          <AuthenticatedRoutes
+            exact
+            path="/questions/:id"
+            component={QuestionDetails}
+          />
+          <AuthenticatedRoutes exact path="/logout" component={Logout} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </Router>
     );
   }
@@ -29,14 +45,7 @@ class App extends Component {
 
 App.propTypes = {
   handleInitialData: PropTypes.func.isRequired,
-  notLoggedIn: PropTypes.bool.isRequired,
 };
-
-function mapStateToProps({ authedUser }) {
-  return {
-    notLoggedIn: authedUser === null,
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -46,4 +55,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
