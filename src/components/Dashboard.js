@@ -3,8 +3,13 @@ import Question from "./Question";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Col } from "react-bootstrap";
+import { handleInitialData } from "../actions/shared";
 
 class DashBoard extends PureComponent {
+  componentDidMount() {
+    this.props.handleInitialData();
+  }
+
   render() {
     const { unansweredQuestions, answeredQuestions } = this.props;
     return (
@@ -59,4 +64,12 @@ function mapStateToProps({ questions, users, authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(DashBoard);
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => {
+      dispatch(handleInitialData());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

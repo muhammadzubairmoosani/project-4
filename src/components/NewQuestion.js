@@ -35,7 +35,7 @@ class NewQuestion extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      return <Redirect to="/dashboard" />;
     }
     const { optionOne, optionTwo } = this.state;
     return (
