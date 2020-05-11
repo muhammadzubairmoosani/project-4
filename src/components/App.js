@@ -24,18 +24,18 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Login} />
           <AuthenticatedRoutes exact path="/dashboard" component={Dashboard} />
-          <AuthenticatedRoutes
+          <Route
             exact
             path="/leaderboard"
             component={LeaderBoard}
           />
-          <AuthenticatedRoutes exact path="/add" component={NewQuestion} />
-          <AuthenticatedRoutes
+          <Route exact path="/add" component={NewQuestion} />
+          <Route
             exact
             path="/questions/:id"
             component={QuestionDetails}
           />
-          <AuthenticatedRoutes exact path="/logout" component={Logout} />
+          <Route exact path="/logout" component={Logout} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>
@@ -55,4 +55,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(App);
+    export default connect(null, mapDispatchToProps)(App);
